@@ -65,17 +65,74 @@
                     <div class="col col-lg-8">
                         <pre class="line-numbers">
                             <code class="language-javascript">
-//Call Hello World
-function helloWorld() {
-    alert("Wello World");
+//get the values from the UI
+//starts or controller function
+function getValues(){
+    //get values from the page
+    let startValue = document.getElementById("startValue").value;
+    let endValue = document.getElementById("endValue").value;
+    //need to validate input
+    //parse into Int
+    startValue = parseInt(startValue);
+    endValue = parseInt(endValue);
+                                
+    if(startValue < endValue){
+        if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+            //call generateNumbers
+            let numbers = generateNumbers(startValue, endValue);
+            //call displayNumbers
+            displayNumbers(numbers);
+            }
+        else{
+            alert("You must enter integers")
+            }
+    }
+    else{
+        alert("First value must be smaller than second value")
+        }
+}
+//generate numbers from startValue to endValue
+//logic function(s)
+function generateNumbers(sValue, eValue){
+    let numbers = [];
+    //want to get all numbers from start to end
+    for(let i = sValue; i <= eValue; i++){
+        numbers.push(i);
+    }
+        return numbers;
+}
+//display the numbers marking the even ones bold
+//display or view function
+function displayNumbers(numbers){
+    let templateRows = "";
+    for(let i = 0; i < numbers.length; i++){
+        let className = "even";
+        let number = numbers[i];
+                                
+        if(number % 2 == 0){
+            className = "even";
+        }
+        else{
+            className = "odd";
+        }
+        //This template literal does NOT render correctly with Prism.
+        //See source at GitHub. 
+        templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+    }
+                                
+        document.getElementById("results").innerHTML = templateRows;
 }
                             </code>
                         </pre>
                     </div>
                     <div class="col col-lg-4">
-                        <p>The Code is structured in one function.</p>
-                        <h5>Hello World</h5>
-                        <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                        <p>The Code is created with three primary functions:</p>
+                        <h5>getValues()</h5>
+                        <p>Clicking the Run button fires off the getValues function which retrieves the values entered, ensures that they are indeed numbers and that the first value is smaller than the last value, and passes them to the next function...</p>
+                        <h5>generateNumbers()</h5>
+                        <p>This function generates an array of numbers beginning and ending with the two values that were passed to it.</p>
+                        <h5>displayNumbers()</h5>
+                        <p>The final function takes the array it was passed and loops through all the values constructing valid HTML markup for the table in the body of the page. As part of the construction of the HTML, it is assigning a class name to each value so the even numbers are displayed as bold via css.</p>
                     </div>
                 </div>
             </div>

@@ -8,14 +8,14 @@
         "name": "Launch Edge",
         "request": "launch",
         "type": "msedge",
-        "url": "http://127.0.0.1:5500",
+        "url": "http://127.0.0.1:5500/index.html",
         "webRoot": "${workspaceFolder}"
     },
         {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://127.0.0.1:5500",
+            "url": "http://127.0.0.1:5500/index.hmtl",
             "webRoot": "${workspaceFolder}"
         }
     ]

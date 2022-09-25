@@ -77,3 +77,11 @@ main>.container {
 .logoFont{
     font-family: 'Courgette', cursive;
 }
+
+.even{
+    font-weight: bold;
+}
+
+.odd{
+    font-weight: 100;
+}

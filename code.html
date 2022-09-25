@@ -66,17 +66,63 @@
                 <div class="col-lg-8">
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            //Call Hello World
-                            function HellowWorld(){
-                                    alert("Hello World");
+                            //get the values from UI
+                            function getValues(){
+                            
+                                let startValue = document.getElementById("startValue").value;
+                                let endValue = document.getElementById("endValue").value;
+                            
+                                startValue = parseInt(startValue);
+                                endValue = parseInt(endValue);
+                            
+                                if(startValue>endValue)alert("Start value must be smaller than end value");
+                            
+                                if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                                    let numbers = generateNumbers(startValue, endValue);
+                                    displayNumbers(numbers);
                                 }
+                                else{alert("Please enter integers");}
+                            }
+                            
+                            //generate numbers from startValue to the endValue
+                                function generateNumbers(startValue, endValue){
+                                    let numbers = [];
+                                    for (let index = startValue; index <= endValue; index++) {            
+                                        numbers.push(index);            
+                                    }
+                                    return numbers;
+                                }
+                            
+                            //display numbers making evens bold
+                            function displayNumbers(numbers){
+                            
+                                let templateRows = "";
+                            
+                                for (let index = 0; index < numbers.length; index++) {
+                                    let className = "";
+                                    let number = numbers[index];
+                            
+                                    if(number % 2 == 0){className="even";}
+                                    else{className="odd";}
+                                    //This does not render correctly with Prism. See GitHub repo
+                                    templateRows += `<tr><td class="${className}">${number}</td></tr>`;
+                                }
+                            
+                                document.getElementById("results").innerHTML = templateRows;
+                            
+                            }
                         </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The code is structured in three main functions.</p>
+                    <h5>getValues()</h5>
+                    <p>getValues retrieves the user inputed values and first parses them into integers. The function then makes sure the start value is not greater than the end value. Finally, it validates that both values are integers before calling the next function...</p>
+                    <h5>generateNumbers()</h5>
+                    <p>generateNumbers first declares an array that we will populate with our values. It then uses a for loop to populate the array. Lastly, it returns the array so it can be used to call our last function...</p>
+                    <h5>displayNumbers()</h5>
+                    <p>Our last function declares an empty string that we will populate and use as HTML. It then uses a for loop to extract the values from our array one at a time so they can be used to populate rows in our results table. It also declares an empty string inside the for loop that is used to set a class name depending on whether the modulus result equals zero. If the value is even then bold styling is applied to that table row via CSS. The function completes by assigning the string it built as the innerHTML of the results table.</p>
+
                 </div>
             </div>
         </div>
